@@ -2,6 +2,7 @@ package com.ncpbails.alexsdelight;
 
 import com.mojang.logging.LogUtils;
 import com.ncpbails.alexsdelight.item.ModItems;
+import com.ncpbails.alexsdelight.misc.ADCreativeTab;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,15 +21,18 @@ public class AlexsDelight
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
+    public static final ADCreativeTab ALEXS_CREATIVE_TAB = new ADCreativeTab();
 
     public AlexsDelight()
-    {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+{
+    IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModItems.register(modEventBus);
+    ModItems.register(modEventBus);
 
-        MinecraftForge.EVENT_BUS.register(this);
-    }
+    ADCreativeTab.registerCreativeTab(modEventBus);
+
+    MinecraftForge.EVENT_BUS.register(this);
+}
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
